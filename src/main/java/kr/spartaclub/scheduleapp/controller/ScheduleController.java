@@ -11,6 +11,8 @@ import java.util.stream.Collectors;
 import org.springframework.web.bind.annotation.PathVariable;
 import kr.spartaclub.scheduleapp.dto.ScheduleUpdateRequestDto;
 import org.springframework.web.bind.annotation.PutMapping;
+import kr.spartaclub.scheduleapp.dto.ScheduleDeleteRequestDto;
+import org.springframework.web.bind.annotation.DeleteMapping;
 
 
 
@@ -76,6 +78,23 @@ public class ScheduleController {
         return ResponseEntity.ok(new ScheduleResponseDto(saved));
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> delete(
+            @PathVariable Long id,
+            @RequestBody ScheduleDeleteRequestDto request
+    ) {
+        Schedule schedule = scheduleRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 일정이 없습니다."));
+
+        // 비밀번호 검증
+        if (!schedule.getPassword().equals(request.getPassword())) {
+            throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
+        }
+
+        scheduleRepository.delete(schedule);
+
+        return ResponseEntity.ok("삭제 완료");
+    }
 
 }
 
