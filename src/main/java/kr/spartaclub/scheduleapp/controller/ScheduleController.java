@@ -49,12 +49,18 @@ public class ScheduleController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ScheduleResponseDto> findOne(@PathVariable Long id) {
-        Schedule schedule = scheduleRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("해당 일정이 없습니다."));
-
-        return ResponseEntity.ok(new ScheduleResponseDto(schedule));
+    public ResponseEntity<?> findOne(@PathVariable Long id) {
+        return scheduleRepository.findById(id)
+                .<ResponseEntity<?>>map(schedule ->
+                        ResponseEntity.ok(new ScheduleResponseDto(schedule))
+                )
+                .orElseGet(() ->
+                        ResponseEntity.status(404).body("해당 일정이 없습니다.")
+                );
     }
+
+
+
 
     @PutMapping("/{id}")
     public ResponseEntity<ScheduleResponseDto> update(
