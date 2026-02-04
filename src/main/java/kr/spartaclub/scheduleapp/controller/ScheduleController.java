@@ -6,6 +6,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import kr.spartaclub.scheduleapp.dto.ScheduleResponseDto;
+import java.util.List;
+import java.util.stream.Collectors;
+
 
 
 @RestController
@@ -26,6 +29,17 @@ public class ScheduleController {
                 )
         );
         return ResponseEntity.ok(new ScheduleResponseDto(saved));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<ScheduleResponseDto>> findAll() {
+        List<Schedule> schedules = scheduleRepository.findAll();
+
+        List<ScheduleResponseDto> response = schedules.stream()
+                .map(ScheduleResponseDto::new)
+                .toList();
+
+        return ResponseEntity.ok(response);
     }
 
 }
