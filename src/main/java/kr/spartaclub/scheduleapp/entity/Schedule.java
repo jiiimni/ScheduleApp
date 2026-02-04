@@ -32,4 +32,10 @@ public class Schedule {
         this.author = author;
         this.password = password;
     }
+
+    public void update(String title, String content) {
+        this.title = title;
+        this.content = content;
+    }
+
 }
