@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.*;
 import kr.spartaclub.scheduleapp.dto.ScheduleResponseDto;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.springframework.web.bind.annotation.PathVariable;
+
 
 
 
@@ -40,6 +42,14 @@ public class ScheduleController {
                 .toList();
 
         return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ScheduleResponseDto> findOne(@PathVariable Long id) {
+        Schedule schedule = scheduleRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 일정이 없습니다."));
+
+        return ResponseEntity.ok(new ScheduleResponseDto(schedule));
     }
 
 }
