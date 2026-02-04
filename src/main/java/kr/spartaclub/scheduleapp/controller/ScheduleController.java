@@ -5,6 +5,8 @@ import kr.spartaclub.scheduleapp.repository.ScheduleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import kr.spartaclub.scheduleapp.dto.ScheduleResponseDto;
+
 
 @RestController
 @RequiredArgsConstructor
@@ -14,7 +16,7 @@ public class ScheduleController {
     private final ScheduleRepository scheduleRepository;
 
     @PostMapping
-    public ResponseEntity<Schedule> create(@RequestBody Schedule request) {
+    public ResponseEntity<ScheduleResponseDto> create(@RequestBody Schedule request) {
         Schedule saved = scheduleRepository.save(
                 new Schedule(
                         request.getTitle(),
@@ -23,7 +25,8 @@ public class ScheduleController {
                         request.getPassword()
                 )
         );
-        return ResponseEntity.ok(saved);
+        return ResponseEntity.ok(new ScheduleResponseDto(saved));
     }
+
 }
 
