@@ -148,4 +148,10 @@
 | password | VARCHAR | 수정/삭제 검증용 비밀번호 |
 
 * 하나의 일정은 하나의 작성자와 내용을 가집니다.
-* 수정 및 삭제 시 비밀번호를 통해 권한을 검증합니다.
+* 수정 및 삭제 시 비밀번호를 통해 권한을 검증합니다.  
+
+[tistory 링크]  
+https://jiiimni.tistory.com/38  
+
+[velog 링크]  
+https://velog.io/@jiiim_ni/%EB%82%B4%EC%9D%BC%EB%B0%B0%EC%9B%80%EC%BA%A0%ED%94%84-Spring3%EA%B8%B0-CH3-%EC%9D%BC%EC%A0%95-%EA%B4%80%EB%A6%AC-%EC%95%B1-%EB%A7%8C%EB%93%A4%EA%B8%B0-%ED%95%84%EC%88%98-%EA%B8%B0%EB%8A%A5
